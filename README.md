@@ -1,6 +1,6 @@
-## ABout
+#About
 
-# Advent-Of-Code-2020-Python
+Advent-Of-Code-2020-Python
 
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels 
 that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, 
@@ -12,5 +12,5 @@ ten-year-old hardware.
 
 Advent of Code is a registered trademark in the United States.
 
-You can join here:
+- You can join here:
 https://adventofcode.com/
