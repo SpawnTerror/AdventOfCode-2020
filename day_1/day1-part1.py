@@ -1,5 +1,6 @@
 import itertools 
 
+
 entries = []
 with open('day_1/input_list.txt', 'r') as f:
     for line in f:
