@@ -1,6 +1,5 @@
 import re
 
-
 entries = []
 line_counter = 0
 correct_pass_count = 0
