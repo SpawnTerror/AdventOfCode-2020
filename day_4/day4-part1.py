@@ -1,23 +1,26 @@
 
-input_data = []
-document = {}
-valid_passports = 0
+import re
+dirtydata = []
+cleandata = []
+documents = {}
+good_documents = []
 
-with open('day_4/input.txt', 'r') as f:
-    for everyline in f:
-        input_data.append(everyline.strip())
+with open('day_4/input.txt', 'r') as input_txt:
+    dirtydata = input_txt.read().split('\n\n')
+  
+    for everyline in dirtydata:
+        cleandata.append(re.split('[\n\s]', everyline))
+   
+    documents = [dict([(line.split(":")) for line in passport]) for passport in cleandata]
+    
+    for passport in documents:
+        if len(passport) >= 8:
+            good_documents.append(passport)
+        if len(passport) == 7:
+            if 'cid' not in [item for item in passport]:
+                    good_documents.append(passport)
+        
+print(len(good_documents))
 
-to_check = set(['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']) # set
 
-for everyline in input_data:
-    if not everyline:
-        if to_check.issubset(set(document.keys())):
-            valid_passports += 1
-        document = {}
-    else:
-        for dict_pair in everyline.split(' '):
-            print(dict_pair)
-            k, v = dict_pair.split(':')
-            document[k] = v
 
-print(valid_passports)
