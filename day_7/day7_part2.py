@@ -15,7 +15,7 @@ So, a single shiny gold bag must contain
 plus 2 vibrant plum bags (and the 11 bags within each of those): 
 
 1 + 1*7 + 2 + 2*11 = 32 bags!
-
+multiply!!!
 '''
 
 with open('day_7/input.txt', 'r') as f:
