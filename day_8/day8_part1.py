@@ -1,57 +1,37 @@
-#Part 1: 1553
-#Part 2: 1877
+# SpawnTerror 2020
+# Python 3.9
 
-def get_file(name):
-    with open(name, 'r') as f:
-        data = f.read().split(sep='\n')
-    return data
-
-def process_commands(data):
-    commands = {line_number: [str, int, False] for line_number in range(0, len(data))} 
-    line_counter = 0
-
-    for line in data:
-        command = line.split(' ')[0]
-        parameter = line.split(' ')[1]
-        commands[line_counter] = [command, parameter, False]
-        line_counter += 1  
+def input_file():
+    with open('day_8/input.txt', 'r') as f:
+        data = f.read().splitlines()
+        commands = {line_number: [str, int] for line_number in range(0, len(data))}
+        counter = 0 
+        for line in data:
+            command = line.split(' ')[0]
+            value = line.split(' ')[1]
+            commands[counter] = [command, value]
+            counter += 1
     return commands
 
-def execute(command):
-    position = 0
-    add_value_to_acc = 0
-
-    if command[0] == 'nop':
-        pass
-    elif command[0] == 'acc':
-        add_value_to_acc += int(command[1])
-    elif command[0] == 'jmp':
-        position += int(command[1])
-        
-    return [add_value_to_acc, position]
-
-def run(commands):
+def evaluate(commands):
     accumulator = 0
-    c = 0
+    index = 0
+    visited = []
+    while index not in visited and index != len(commands):
+        command = commands[index][0]
+        value = commands[index][1]
+        visited.append(index)
+        if command == 'nop':
+            index += 1
+        elif command == 'jmp':
+            index += int(value)
+        elif command == 'acc':
+            accumulator += int(value)
+            index += 1
+    return accumulator, index
+
+def part_1(commands):
+    return evaluate(commands)[0]
     
-    while True:
-        command = commands[c]
-        
-        if command[2] == False:
-            commands[c] = [command[0], command[1], True]
-            returned = execute(command)
-            accumulator += returned[0]
-        else:  
-            
-            break   
-        if returned[1] == 0:
-            c += 1
-        else:       
-            c += int(returned[1])
-            
-    return accumulator
-
-data = get_file('day_8/input.txt')
-commands = process_commands(data)
-
-print(f'\n*** Accumulator value ---- {run(commands)}.')
+commands = input_file()
+print(f'Part 1 {part_1(commands)}')
