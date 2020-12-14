@@ -1,5 +1,5 @@
 # SpawnTerror 2020
-# Python 3.9
+# Python 3.9 
 
 def input_file():
     with open('day_8/input.txt', 'r') as f:
@@ -32,6 +32,6 @@ def evaluate(commands):
 
 def part_1(commands):
     return evaluate(commands)[0]
-    
+
 commands = input_file()
 print(f'Part 1 {part_1(commands)}')

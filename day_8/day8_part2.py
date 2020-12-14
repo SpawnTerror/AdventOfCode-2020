@@ -1,5 +1,5 @@
 # SpawnTerror 2020
-# python 3.9
+# python 3.9 
 
 def input_file():
     with open('day_8/input.txt', 'r') as f:
