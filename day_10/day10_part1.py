@@ -1,14 +1,29 @@
-with open('day_10/sample.txt', 'r') as f:
-    data = [int(line) for line in f.read().splitlines()]
-    adapters = sorted(data)
+# SpawnTerror 2020
+# Python 3.9
+# AOC Day 10 Part 1
 
-collected = []
+def get_input(input: int) -> list:
+    if input == 1: path = 'day_10/sample.txt'
+    if input == 2: path = 'day_10/input.txt'
+    with open(path, 'r') as file:
+        data = [int(number) for number in file.read().splitlines()]
+    return data
 
-for x in range(0, len(adapters)):
+def part_1(data: list) -> list:
+    outlet = 0
+    adapters_list = list(sorted(data))
     
-    a = int(adapters[x])
-    c = int(collected[x])
+    valid = []
+    dif_1j = 0
+    dif_3j = 1 
 
-    if a < c:
-        x +=1
-    collected.append(adapters)
+    for i in adapters_list:
+        if (i - outlet) <= 3:
+            valid.append(int(i))
+            if (i-outlet) == 1: dif_1j += 1
+            if (i-outlet) == 3: dif_3j += 1
+            outlet = i
+    return dif_1j * dif_3j
+
+data = get_input(2)
+print(f'Part 1: {part_1(data)}.')
