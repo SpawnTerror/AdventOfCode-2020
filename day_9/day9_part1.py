@@ -1,36 +1,28 @@
-# 731031916
-# 93396727
+# SpawnTerror 2020
+# Python 3.9
+# AOC Day 9 Part 1
 
-from itertools import permutations
+from itertools import combinations
 
 with open('day_9/input.txt', 'r') as f:
-    data = [line for line in f.read().splitlines()]
+    lines = f.read().splitlines()
 
-def day9_part1(preamble):
+def part_1(lines, index):
+    preamble = []
+    valid = []
+    for i in range(len(lines) - index):
+        check_number = int(lines[i + index])
+        preamble = list(lines[i:i + index])
+        for numbers in combinations(preamble, 2):
+            if int(numbers[0]) + int(numbers[1]) == check_number:
+                valid.append(check_number)
+    for number in list(lines[index:]):
+        if int(number) not in valid:
+            return number
+                
+# Part 1's second argument takes any preamble number
+# for example: part_1(lines, 5) for testing with sample.txt as input
 
-    decode = int(preamble)
+invalid_number = part_1(lines, 25)
+print(f'Part 1: {invalid_number}.')
 
-    for number in range(decode, len(data)):
-        xmas = int(number)
-
-        list_of_25 = []
-        found_pairs = 0
-
-        for e in range(xmas-25, xmas):
-            list_of_25.append(data[e])
-        
-        sort_me = set(list(permutations(list_of_25, 2)))
-        sorted_all_possible = set(map(lambda x: tuple(sorted(x)),sort_me))
-        
-        for i in sorted_all_possible:
-            n1, n2, nTest = int(i[0]), int(i[1]), int(data[xmas])
-
-            if n1 + n2 == nTest:
-                found_pairs += 1
-
-        if found_pairs == 0:
-            break
-
-    return nTest
-
-print(day9_part1(25))
