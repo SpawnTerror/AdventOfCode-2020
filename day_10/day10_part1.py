@@ -12,11 +12,9 @@ def get_input(input: int) -> list:
 def part_1(data: list) -> list:
     outlet = 0
     adapters_list = list(sorted(data))
-    
     valid = []
     dif_1j = 0
     dif_3j = 1 
-
     for i in adapters_list:
         if (i - outlet) <= 3:
             valid.append(int(i))
